@@ -8,7 +8,7 @@ export const findNextNumber = (nums, n) => {
   // .indexOf() returns -1 if element is not present in the array
   // So returning "null" when element is not present
   // OR if the element is the final position return null
-  if (indx == -1 || indx == nums.length - 1) {
+  if (indx === -1 || indx === nums.length - 1) {
     return null;
   }
   //returning the next element
@@ -83,7 +83,7 @@ for ( const [key, value] of Object.entries(haystack))
   //If the value is a string AND
   // as it should not be case sensitive,
   // checking if the lowercased string contains given searchTerm
-  if(typeof(value) == "string" && value.toLowerCase().includes(searchTerm))
+  if(typeof(value) === "string" && value.toLowerCase().includes(searchTerm))
   {
     return true;
   }
@@ -110,7 +110,7 @@ export const getWordFrequencies = (str) => {
   //if it already exists increment the value by 1
   s.map((ele) => {
     ele = ele.toLowerCase();
-    if (freq[ele] == undefined) {
+    if (freq[ele] === undefined) {
       freq[ele] = 1;
     } else {
       freq[ele]++;

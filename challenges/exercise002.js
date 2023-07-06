@@ -7,7 +7,7 @@ export function getFillings(sandwich) {
 export function isFromManchester(person) {
   if (person === undefined) throw new Error("person is required");
   // Your code here!
-  const result = person["city"] == "Manchester" ? true : false;
+  const result = person["city"] === "Manchester" ? true : false;
   return result;
 }
 
@@ -30,7 +30,7 @@ export function countSheep(arr) {
   // Creating an empty dictionary to store frequency count
   let freq = {};
   for (let value of uniqueArr) {
-    freq[value] = arr.filter((ele) => ele == value).length;
+    freq[value] = arr.filter((ele) => ele === value).length;
   }
   if ("sheep" in freq) {
     return freq["sheep"];
@@ -42,8 +42,8 @@ export function hasMPostCode(person) {
   if (person === undefined) throw new Error("person is required");
   // Your code here!
   if (
-    person.address.postCode.charAt(0) == "M" &&
-    person.address.city == "Manchester"
+    person.address.postCode.charAt(0) === "M" &&
+    person.address.city === "Manchester"
   ) {
     return true;
   }

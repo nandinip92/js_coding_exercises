@@ -36,7 +36,7 @@ export function getSalePrice(originalPrice, reduction) {
 export function getMiddleCharacter(str) {
   if (str === undefined) throw new Error("str is required");
   // Add your code here!
-  if (str.length % 2 == 0) {
+  if (str.length % 2 === 0) {
     return str.substring(str.length / 2 - 1, str.length / 2 + 1);
   } else {
     return str.charAt(str.length / 2);
@@ -58,7 +58,7 @@ export function reverseAllWords(words) {
 export function countLinuxUsers(users) {
   if (users === undefined) throw new Error("users is required");
   // Add your code here!
-  const onlyLinuxUsers = users.filter((u) => u["type"] == "Linux");
+  const onlyLinuxUsers = users.filter((u) => u["type"] === "Linux");
   return onlyLinuxUsers.length;
 }
 
@@ -73,11 +73,11 @@ export function getMeanScore(scores) {
 export function simpleFizzBuzz(n) {
   if (n === undefined) throw new Error("n is required");
   // Add your code here!
-  if (n % 15 == 0) {
+  if (n % 15 === 0) {
     return "fizzbuzz";
-  } else if (n % 3 == 0) {
+  } else if (n % 3 === 0) {
     return "fizz";
-  } else if (n % 5 == 0) {
+  } else if (n % 5 === 0) {
     return "buzz";
   } else {
     return n;

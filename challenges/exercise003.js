@@ -7,10 +7,10 @@ export function getSquares(nums) {
 export function camelCaseWords(words) {
   if (words === undefined) throw new Error("words is required");
   // Your code here!
-  if (words.length == 0) {
+  if (words.length === 0) {
     return words;
   }
-  if (words.length == 1) {
+  if (words.length === 1) {
     return words[0];
   }
   // If there are more than 1 words in the given list

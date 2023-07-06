@@ -11,7 +11,7 @@ export function findNamesBeginningWith(names, char) {
   // Your code here
   const result = names.filter(item => {
     //comparing the first character of the string with the given charecter
-    if (item.charAt(0) == char) {
+    if (item.charAt(0) === char) {
       return item;
     }
   });
@@ -28,7 +28,7 @@ export function findVerbs(words) {
 
     // checking if there are more than one elements in the list
     // and the first element is "to"
-    if (wordSplit.length > 1 && wordSplit[0] == "to") 
+    if (wordSplit.length > 1 && wordSplit[0] === "to") 
 	{
       return item;
     }
