@@ -3,32 +3,50 @@
 */
 
 /**
- * This function takes a number, e.g. 123 and returns the sum of all its digits, e.g 6 in this example.
+ * This function takes a number, e.g. 123 and
+ * returns the sum of all its digits, e.g 6 in this example.
  * @param {Number} n
  */
 export const sumDigits = (n) => {
-	if (n === undefined) throw new Error('n is required');
+  if (n === undefined) throw new Error("n is required");
+  if (isNaN(n)) throw new Error("Input must be a number");
+  if (n >= 0 && n < 10) return n;
+  n = n.toString().split("");
+  n = n.map((ch) => Number(ch));
+  n = n.filter((ch) => !isNaN(ch)).reduce((acc, val) => acc + val);
+  return n;
 };
 
 /**
- * This function creates a range of numbers as an array. It received a start, an end and a step. Step is the gap between numbers in the range. For example, if start = 3, end = 11 and step = 2 the resulting range would be: [3, 5, 7, 9, 11]
+ * This function creates a range of numbers as an array.
+ * It received a start, an end and a step.
+ * Step is the gap between numbers in the range.
+ * For example, if start = 3, end = 11 and step = 2
+ * the resulting range would be: [3, 5, 7, 9, 11]
  * Both the start and the end numbers are inclusive.
- * Step is an optional parameter. If it is not provided, assume the step is 1.
+ * Step is an optional parameter.
+ * If it is not provided, assume the step is 1.
  * @param {Number} start
  * @param {Number} end
  * @param {Number} step
  */
 export const createRange = (start, end, step) => {
-	if (start === undefined) throw new Error('start is required');
-	if (end === undefined) throw new Error('end is required');
-	if (step === undefined)
-		console.log(
-			"FYI: Optional step parameter not provided. Remove this check once you've handled the optional step!"
-		);
+  if (start === undefined) throw new Error("start is required");
+  if (end === undefined) throw new Error("end is required");
+  if (start < 0 || end < 0)
+    throw new Error("start and end should be greater than 0");
+  if (start > end) throw new Error("end should be greater than start");
+  if (step === undefined) step = 1;
+  const range = Array.from(
+    { length: (end - start) / step + 1 },
+    (_, i) => start + i * step
+  );
+  return range;
 };
 
 /**
- * This function takes an array of user objects and their usage in minutes of various applications. The format of the data should be as follows:
+ * This function takes an array of user objects and their usage in minutes of various applications.
+ * The format of the data should be as follows:
  * [
  *  {
  *    username: "beth_1234",
@@ -51,20 +69,46 @@ export const createRange = (start, end, step) => {
  *   },
  * ]
  *
- * The function should return an array of usernames of users who have used more than 100 minutes of screentime for a given date.
+ * The function should return an array of usernames of users who have used more than 100 minutes of screentime
+ * for a given date.
  * The date will be provided in the format "2019-05-04" (YYYY-MM-DD)
- * For example, if passed the above users and the date "2019-05-04" the function should return ["beth_1234"] as she used over 100 minutes of screentime on that date.
+ * For example, if passed the above users and the date "2019-05-04" the function should return ["beth_1234"]
+ * as she used over 100 minutes of screentime on that date.
  * @param {Array} users
  */
 export const getScreentimeAlertList = (users, date) => {
-	if (users === undefined) throw new Error('users is required');
-	if (date === undefined) throw new Error('date is required');
+  if (users === undefined) throw new Error("users is required");
+  if (date === undefined) throw new Error("date is required");
+
+  for (const [key, value] of Object.entries(users)) {
+    // Filtering only the records with the given date.
+    //screenTime will have only the records matching with the given date
+    let screenTime = value.screenTime.filter((d) => d.date.includes(date));
+
+    // Calculating the ScreenTime by adding usage values of all the apps
+    screenTime = screenTime.map((st) =>
+      Object.values(st.usage).reduce((acc, val) => acc + val)
+    );
+
+    value.screenTime = screenTime;
+  }
+  const result = users
+    .map((u) => {
+      if (u.screenTime.some((n) => n > 100)) return u.username;
+    })
+    .filter((st) => !(st === undefined));
+
+  return result;
 };
 
 /**
- * This function will receive a hexadecimal color code in the format #FF1133. A hexadecimal code is a number written in hexadecimal notation, i.e. base 16. If you want to know more about hexadecimal notation:
+ * This function will receive a hexadecimal color code in the format #FF1133.
+ * A hexadecimal code is a number written in hexadecimal notation, i.e. base 16.
+ * If you want to know more about hexadecimal notation:
  * https://www.youtube.com/watch?v=u_atXp-NF6w
- * For colour codes, the first 2 chars (FF in this case) represent the amount of red, the next 2 chars (11) represent the amound of green, and the last 2 chars (33) represent the amount of blue.
+ * For colour codes, the first 2 chars (FF in this case) represent the amount of red,
+ * the next 2 chars (11) represent the amound of green, and the last 2 chars (33) represent the amount of blue.
+ *
  * Colours can also be represented in RGB format, using decimal notation.
  * This function should transform the hex code into an RGB code in the format:
  * "rgb(255,17,51)"
@@ -72,7 +116,7 @@ export const getScreentimeAlertList = (users, date) => {
  * @param {String} str
  */
 export const hexToRGB = (hexStr) => {
-	if (hexStr === undefined) throw new Error('hexStr is required');
+  if (hexStr === undefined) throw new Error("hexStr is required");
 };
 
 /**
@@ -86,5 +130,5 @@ export const hexToRGB = (hexStr) => {
  * @param {Array} board
  */
 export const findWinner = (board) => {
-	if (board === undefined) throw new Error('board is required');
+  if (board === undefined) throw new Error("board is required");
 };
