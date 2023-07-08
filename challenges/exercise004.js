@@ -89,8 +89,6 @@ export function findSentencesContaining(sentences, str) {
 export function getLongestSides(triangles) {
   if (!triangles) throw new Error("triangles is required");
   // Your code here
-  let longestSides = triangles.map((t) => {
-    return t.reduce((a, b) => Math.max(a, b));
-  });
+  let longestSides = triangles.map((t) => Math.max(...t));
   return longestSides;
 }
