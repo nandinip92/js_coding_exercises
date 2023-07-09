@@ -117,6 +117,24 @@ export const getScreentimeAlertList = (users, date) => {
  */
 export const hexToRGB = (hexStr) => {
   if (hexStr === undefined) throw new Error("hexStr is required");
+  if (hexStr.length < 7)
+    throw new Error("No Short hand notations of Hexadecimal");
+
+  //Checking if the given input is a Hexadecimal or not
+  const regExp = /^#[0-9A-F]{6}$/i;
+  if (!regExp.test(hexStr))
+    throw new Error("Given Hex input is not a valid color");
+
+  //Ignoring '#' at starting of the string if passed as an argument
+  hexStr =
+    hexStr.charAt(0) === "#" ? hexStr.substring(1, hexStr.length) : hexStr;
+
+  //Splitting the value by 2 letters
+  let rgb = hexStr.match(/.{2}/g) ?? []; //?? -> Null coalescing operator
+
+  rgb = rgb.map((v) => parseInt(v, 16));
+
+  return `rgb(${rgb})`;
 };
 
 /**
