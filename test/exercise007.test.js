@@ -1,8 +1,8 @@
-import { get } from "request";
 import {
   sumDigits,
   createRange,
   getScreentimeAlertList,
+  hexToRGB,
 } from "../challenges/exercise007-optional";
 
 describe("sumDigits", () => {
@@ -194,5 +194,31 @@ describe("getScreentimeAlertList", () => {
     ];
 
     expect(getScreentimeAlertList(users, "2019-06-11")).toEqual([]);
+  });
+});
+
+describe("hexToRGB", () => {
+  test("Throws error if the given hexadecimal string is invalid", () => {
+    //No short hands are allowed
+    expect(() => {
+      hexToRGB("#fc9");
+    }).toThrow("No Short hand notations of Hexadecimal");
+    //If the given string is a valid color or not
+    expect(() => hexToRGB("#AEGFHR")).toThrow(
+      "Given Hex input is not a valid color"
+    );
+  });
+
+  test("Returns RGB code for the given hexadecimal value", () => {
+    expect(hexToRGB("#FF1133")).toBe("rgb(255,17,51)");
+    expect(hexToRGB("#0000FF")).toBe("rgb(0,0,255)");
+    expect(hexToRGB("#000000")).toBe("rgb(0,0,0)");
+    expect(hexToRGB("#FFFFFF")).toBe("rgb(255,255,255)");
+    expect(hexToRGB("#F0F8FF")).toBe("rgb(240,248,255)");
+  });
+
+  test("Hexadecimal value is not case sensitive", () => {
+    expect(hexToRGB("#b2dfee")).toBe("rgb(178,223,238)");
+    expect(hexToRGB("#fe6f5e")).toBe("rgb(254,111,94)");
   });
 });
