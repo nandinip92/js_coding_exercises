@@ -149,4 +149,56 @@ export const hexToRGB = (hexStr) => {
  */
 export const findWinner = (board) => {
   if (board === undefined) throw new Error("board is required");
+  const sqMatrix = board.filter((r) => r.length === board.length);
+  if (sqMatrix.length !== board.length)
+    throw new Error("Given input matrix is not a square matrix");
+
+  const validValues = ["X", "0", null];
+  const isValid = board.every((row) => {
+    return row.every((val) => validValues.includes(val));
+  });
+
+  if (!isValid)
+    throw new Error("Given matrix should only contain X,0 or null values only");
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      let r = 0,
+        c = 0;
+      //Empty spaces are ignored
+      if (board[i][j] === null) break;
+      for (let k = 0; k < board.length; k++) {
+        //Checking Row
+        if (board[i][k] === board[i][j]) {
+          r += 1;
+        }
+        //checking column
+        if (board[k][j] === board[i][j]) {
+          c += 1;
+        }
+      }
+      if (r === board.length || c === board.length) return board[i][j];
+    }
+  }
+
+  //Checking Diagonal if elements [(0,0),(1,1),(2,2)] are same
+  let d = [];
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (i == j) d.push(board[i][j]);
+    }
+  }
+
+  if (d.every((ele) => ele === d[0])) return d[0];
+  ////Checking Diagonal if elements [(0,2),(1,1),(2,0)] are same
+  d = [];
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      if (i + j === board.length - 1) d.push(board[i][j]);
+    }
+  }
+
+  if (d.every((ele) => ele === d[0])) return d[0];
+
+  return null;
 };
