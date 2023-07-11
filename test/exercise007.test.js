@@ -3,6 +3,7 @@ import {
   createRange,
   getScreentimeAlertList,
   hexToRGB,
+  findWinner,
 } from "../challenges/exercise007-optional";
 
 describe("sumDigits", () => {
@@ -220,5 +221,76 @@ describe("hexToRGB", () => {
   test("Hexadecimal value is not case sensitive", () => {
     expect(hexToRGB("#b2dfee")).toBe("rgb(178,223,238)");
     expect(hexToRGB("#fe6f5e")).toBe("rgb(254,111,94)");
+  });
+});
+
+describe("findWinner", () => {
+  test("Throws Errors if the input is not Valid", () => {
+    const board = [
+      ["X", "0", null],
+      ["X", "0"],
+      ["X", null, "0"],
+    ];
+
+    expect(() => {
+      findWinner(board);
+    }).toThrow("Given input matrix is not a square matrix");
+
+    const board0 = [
+      ["X", 1, "2"],
+      ["X", "0", null],
+      ["X", null, "0"],
+    ];
+
+    expect(() => {
+      findWinner(board0);
+    }).toThrow("Given matrix should only contain X,0 or null values only");
+  });
+
+  test("Return 'X' if player X has won, '0' if the player 0 has won, and null if there is currently no winner", () => {
+    const board1 = [
+      ["X", "0", null],
+      ["X", null, "0"],
+      ["X", null, "0"],
+    ];
+    expect(findWinner(board1)).toBe("X");
+
+    const board2 = [
+      [null, "0", "X"],
+      ["0", "0", "0"],
+      ["X", null, "X"],
+    ];
+    expect(findWinner(board2)).toBe("0");
+
+    const board3 = [
+      ["0", "X", null, "X"],
+      ["0", null, "X", "0"],
+      ["0", null, "X", "0"],
+      ["0", "X", null, "X"],
+    ];
+    expect(findWinner(board3)).toBe("0");
+
+    const board4 = [
+      ["0", "X", null],
+      ["X", null, "0"],
+      ["0", "0", null],
+    ];
+    expect(findWinner(board4)).toBe(null);
+  });
+
+  test("Testing if diagonals meet the requirements", () => {
+    const board = [
+      ["X", "0", "0"],
+      [null, "X", "0"],
+      ["0", "X", "X"],
+    ];
+    expect(findWinner(board)).toBe("X");
+
+    const board0 = [
+      ["X", "X", "0"],
+      ["X", "0", "0"],
+      ["0", "X", null],
+    ];
+    expect(findWinner(board0)).toBe("0");
   });
 });
