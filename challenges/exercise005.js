@@ -8,11 +8,8 @@ export const findNextNumber = (nums, n) => {
   // .indexOf() returns -1 if element is not present in the array
   // So returning "null" when element is not present
   // OR if the element is the final position return null
-  if (indx === -1 || indx === nums.length - 1) {
-    return null;
-  }
-  //returning the next element
-  return nums[indx + 1];
+  //ELSE returning the next element
+  return indx === -1 || indx === nums.length - 1 ? null : nums[indx + 1];
 };
 
 export const count1sand0s = (str) => {
