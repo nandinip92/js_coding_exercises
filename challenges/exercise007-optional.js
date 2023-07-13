@@ -161,44 +161,45 @@ export const findWinner = (board) => {
   if (!isValid)
     throw new Error("Given matrix should only contain X,0 or null values only");
 
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      let r = 0,
-        c = 0;
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board.length; col++) {
+      let row_count = 0,
+        col_count = 0;
       //Empty spaces are ignored
-      if (board[i][j] === null) break;
+      if (board[row][col] === null) break;
       for (let k = 0; k < board.length; k++) {
         //Checking Row
-        if (board[i][k] === board[i][j]) {
-          r += 1;
+        if (board[row][k] === board[row][col]) {
+          row_count += 1;
         }
         //checking column
-        if (board[k][j] === board[i][j]) {
-          c += 1;
+        if (board[k][col] === board[row][col]) {
+          col_count += 1;
         }
       }
-      if (r === board.length || c === board.length) return board[i][j];
+      if (row_count === board.length || col_count === board.length)
+        return board[row][col];
     }
   }
 
   //Checking Diagonal if elements [(0,0),(1,1),(2,2)] are same
-  let d = [];
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      if (i == j) d.push(board[i][j]);
+  let diagonal = [];
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board.length; col++) {
+      if (row == col) diagonal.push(board[row][col]);
     }
   }
 
-  if (d.every((ele) => ele === d[0])) return d[0];
+  if (diagonal.every((ele) => ele === diagonal[0])) return diagonal[0];
   ////Checking Diagonal if elements [(0,2),(1,1),(2,0)] are same
-  d = [];
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      if (i + j === board.length - 1) d.push(board[i][j]);
+  diagonal = [];
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board.length; col++) {
+      if (row + col === board.length - 1) diagonal.push(board[row][col]);
     }
   }
 
-  if (d.every((ele) => ele === d[0])) return d[0];
+  if (diagonal.every((ele) => ele === diagonal[0])) return diagonal[0];
 
   return null;
 };
