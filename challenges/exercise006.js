@@ -123,6 +123,5 @@ export const areWeCovered = (staff, day) => {
     if (d.rota.includes(day)) return day;
   });
 
-  if (staff.length < 3) return false;
-  return true;
+  return staff.length < 3 ? false : true;
 };
