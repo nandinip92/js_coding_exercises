@@ -48,8 +48,7 @@ export const sumArrays = (arrs) => {
 
   //Using reduce calculating the Sum of array
 
-  result = result.reduce((acc, currVal) => acc + currVal);
-  return result;
+  return result.reduce((acc, currVal) => acc + currVal);
 };
 
 export const arrShift = (arr) => {
@@ -72,23 +71,17 @@ export const findNeedle = (haystack, searchTerm) => {
   if (haystack === undefined) throw new Error("haystack is required");
   if (searchTerm === undefined) throw new Error("searchTerm is required");
   // Your code here!
-  
+
   //Since the search should not be case sensitive,
   //converting the search term into lowercase
   searchTerm = searchTerm.toLowerCase();
 
-  //The Object.entries() static method returns an array of a given object's own enumerable string-keyed property key-value pairs.
-for ( const [key, value] of Object.entries(haystack))
-{
-  //If the value is a string AND
-  // as it should not be case sensitive,
-  // checking if the lowercased string contains given searchTerm
-  if(typeof(value) === "string" && value.toLowerCase().includes(searchTerm))
-  {
-    return true;
-  }
-}
- return false;
+  //The Object.values() static method returns an array of a given object's own enumerable string-keyed property values.
+  const values = Object.values(haystack).filter(
+    (ele) => typeof ele === "string" && ele.toLowerCase().includes(searchTerm)
+  );
+
+  return values.length > 0 ? true : false;
 };
 
 export const getWordFrequencies = (str) => {
