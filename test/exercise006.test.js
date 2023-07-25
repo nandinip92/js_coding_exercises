@@ -8,6 +8,7 @@ import {
 
 describe("sumMultiples", () => {
   test("throws an error if array is not passed", () => {
+    //Arrange, Act and Assert
     expect(() => {
       sumMultiples();
     }).toThrow("arr is required");
@@ -18,12 +19,15 @@ describe("sumMultiples", () => {
   });
 
   test("Returns 0 if there are no multiples of 3 or 5", () => {
+    //Arrange and Act
     const result = sumMultiples([2, 4, 7, 8, 11, 47]);
     const expected = 0;
+    //Assert
     expect(result).toBe(expected);
   });
 
   test("Returns sum of numbers that are multiples of 3 or 5", () => {
+    //Arrange, Act and Assert
     expect(sumMultiples([1, 3, 5])).toBe(8);
     expect(sumMultiples([10, 27, 15, 96, 23, 12, 35, 71])).toBe(195);
     expect(sumMultiples([3.0, 5.0])).toBe(8);
@@ -33,6 +37,7 @@ describe("sumMultiples", () => {
 
 describe("isValidDNA", () => {
   test("throws an error if array is not passed", () => {
+    //Arrange, Act and Assert
     expect(() => {
       isValidDNA();
     }).toThrow("str is required");
@@ -43,18 +48,21 @@ describe("isValidDNA", () => {
   });
 
   test("Returns 'false' if DNA string doesnot contain characters C, G, T or A only.", () => {
+    //Arrange, Act and Assert
     expect(isValidDNA("brown")).toBe(false);
     expect(isValidDNA("run")).toBe(false);
     expect(isValidDNA("deer")).toBe(false);
   });
 
   test("Returns 'true' if string contains valid DNA characters C, G, T or A only.", () => {
+    //Arrange, Act and Assert
     expect(isValidDNA("CAPE")).toBe(true);
     expect(isValidDNA("DOG")).toBe(true);
     expect(isValidDNA("TEE")).toBe(true);
   });
 
   test("DNA should not be case sensitive", () => {
+    //Arrange, Act and Assert
     expect(isValidDNA("hat")).toBe(true);
     expect(isValidDNA("glue")).toBe(true);
     expect(isValidDNA("tree")).toBe(true);
@@ -64,6 +72,7 @@ describe("isValidDNA", () => {
 
 describe("getComplementaryDNA", () => {
   test("throws an error if input is not valid", () => {
+    //Arrange, Act and Assert
     expect(() => {
       getComplementaryDNA();
     }).toThrow("str is required");
@@ -75,6 +84,7 @@ describe("getComplementaryDNA", () => {
 
   //Assuming isValidDNA is not invoked before calling this function!
   test("Returns empty String if string contains valid DNA characters C, G, T or A only.", () => {
+    //Arrange, Act and Assert
     expect(getComplementaryDNA("brown")).toBe("");
     expect(getComplementaryDNA("run")).toBe("");
     expect(getComplementaryDNA("deer")).toBe("");
@@ -82,6 +92,7 @@ describe("getComplementaryDNA", () => {
 
   test(`Returns a string of the complementary base pairs.\n 
     \ T always pairs with A, and C always pairs with G`, () => {
+    //Arrange, Act and Assert
     expect(getComplementaryDNA("ACTG")).toBe("TGAC");
     expect(getComplementaryDNA("CAPE")).toBe("GTPE");
     expect(getComplementaryDNA("DOG")).toBe("DOC");
@@ -89,6 +100,8 @@ describe("getComplementaryDNA", () => {
   });
 
   test("DNA should not be case sensitive", () => {
+    //Arrange, Act and Assert
+
     expect(getComplementaryDNA("hat")).toBe("hta");
     expect(getComplementaryDNA("tree")).toBe("aree");
     expect(getComplementaryDNA("goAt")).toBe("coTa");
@@ -96,6 +109,7 @@ describe("getComplementaryDNA", () => {
 });
 
 describe("createMatrix", () => {
+  //Arrange, Act and Assert
   test("throws an error if input is not valid", () => {
     expect(() => {
       createMatrix(-1, "test");
@@ -106,6 +120,7 @@ describe("createMatrix", () => {
   });
 
   test("Returns an array of n arrays", () => {
+    //Act and Assert
     expect(createMatrix(1, "hello")).toEqual([["hello"]]);
     expect(createMatrix(3, "foo")).toEqual([
       ["foo", "foo", "foo"],
@@ -122,6 +137,7 @@ describe("createMatrix", () => {
   });
 
   test("When a number is passed as a 'fill'", () => {
+    //Act and Assert
     expect(createMatrix(2, 10)).toEqual([
       [10, 10],
       [10, 10],
@@ -135,6 +151,7 @@ describe("createMatrix", () => {
   });
 
   test("When a floating point is passed", () => {
+    //Act and Assert
     expect(createMatrix(2, 1.5)).toEqual([
       [1.5, 1.5],
       [1.5, 1.5],
@@ -149,6 +166,7 @@ describe("createMatrix", () => {
 
 describe("areWeCovered", () => {
   test("Returns false when there are  no staff at all", () => {
+    //Arrange, Act and Assert
     expect(areWeCovered([], "Sunday")).toBe(false);
     expect(areWeCovered([], "Monday")).toBe(false);
     expect(areWeCovered([], "Tuesday")).toBe(false);
@@ -159,6 +177,7 @@ describe("areWeCovered", () => {
   });
 
   test("Returns 'false' if there are no sufficient staff", () => {
+    //Arrange
     const staff = [
       { name: "Tom", rota: ["Sunday", "Monday", "Tuesday"] },
       { name: "Jay", rota: ["Sunday", "Monday", "Tuesday"] },
@@ -169,12 +188,14 @@ describe("areWeCovered", () => {
       { name: "Poppy", rota: ["Sunday", "Monday", "Friday"] },
     ];
 
+    //Act and Assert
     expect(areWeCovered(staff, "Sunday")).toBe(false);
     expect(areWeCovered(staff, "Wednesday")).toBe(false);
     expect(areWeCovered(staff1, "Friday")).toBe(false);
   });
 
   test("Returns 'true' if there are at least 3 staff members per day", () => {
+    //Arrange
     const staff = [
       { name: "Tom", rota: ["Sunday", "Monday", "Tuesday"] },
       { name: "Jay", rota: ["Sunday", "Monday", "Wednesday"] },
@@ -186,18 +207,22 @@ describe("areWeCovered", () => {
       { name: "Kate", rota: ["Monday", "Tuesday", "Friday", "Saturday"] },
     ];
 
+    //Act and Assert
     expect(areWeCovered(staff, "Sunday")).toBe(true);
     expect(areWeCovered(staff, "Monday")).toBe(true);
     expect(areWeCovered(staff1, "Tuesday")).toBe(true);
   });
 
   test("Returns 'true' if there are more than 3 staff members per day", () => {
+    //Arrange
     const staff = [
       { name: "Tom", rota: ["Sunday", "Monday", "Tuesday"] },
       { name: "Jay", rota: ["Sunday", "Monday", "Tuesday"] },
       { name: "Poppy", rota: ["Sunday", "Monday", "Wednesday"] },
       { name: "Rex", rota: ["Sunday", "Monday", "Thursday"] },
     ];
+
+    //Act and Assert
     expect(areWeCovered(staff, "Monday")).toBe(true);
   });
 });

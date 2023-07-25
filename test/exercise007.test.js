@@ -8,24 +8,29 @@ import {
 
 describe("sumDigits", () => {
   test("Throws error is a string is passed as an input", () => {
+    //Arrange, Act and Assert
     expect(() => {
       sumDigits("Booo");
     }).toThrow("Input must be a number");
   });
   test("Returns 0 if the given number is 0", () => {
+    //Arrange, Act and Assert
     expect(sumDigits(0)).toBe(0);
   });
 
   test("Returns sum of the digits in the given number 'n'", () => {
+    //Act and Assert
     expect(sumDigits(123)).toBe(6);
     expect(sumDigits(8)).toBe(8);
     expect(sumDigits(395)).toBe(17);
   });
   test("Ignores the decimal point if a Float is given as input", () => {
+    //Act and Assert
     expect(sumDigits(56.8)).toBe(19);
   });
 
   test("Returns Sum if the given number is less than 0/ negative number", () => {
+    //Act and Assert
     expect(sumDigits(-3)).toBe(3);
     expect(sumDigits(-57)).toBe(12);
   });
